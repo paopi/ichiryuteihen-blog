@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 export async function getStaticPaths() {
@@ -28,5 +29,10 @@ const { Content } = await render(post);
   prev={prev}
   next={next}
 >
+  {post.data.thumbnail && (
+    <figure class="article-thumbnail">
+      <Image src={post.data.thumbnail} alt={post.data.title} width={800} />
+    </figure>
+  )}
   <Content />
 </ArticleLayout>
