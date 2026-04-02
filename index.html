@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ゲーム・ツールの小さなバグ修正、Windows互換性問題の解消、小さな面倒ごとを解消するTips集。">
+  <title>一留底辺ブログ - ゲーム・IT・FXのTips集</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // ダークモード白フラッシュ防止: CSS読み込み直後、body描画前にテーマ適用
+    (function(){var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();
+  </script>
+</head>
+<body>
+
+  <!-- ============ ヘッダー ============ -->
+  <header class="site-header">
+
+    <!-- 上段: ロゴ + SNS（中央配置） -->
+    <div class="header-top">
+      <div class="header-inner-top">
+
+        <!-- ロゴグループ: 留 + サイト名 + SNS -->
+        <div class="site-logo">
+          <a href="index.html">
+            <span class="logo-icon">留</span>
+            <span class="logo-text">一留底辺ブログ</span>
+          </a>
+          <div class="sns-links">
+            <!-- X (Twitter) -->
+            <a href="#" class="sns-link" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <!-- YouTube -->
+            <a href="#" class="sns-link" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+            <!-- Twitch -->
+            <a href="#" class="sns-link" aria-label="Twitch">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- テーマ切替（右上絶対配置） -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="テーマ切替">
+          🌙 ダーク
+        </button>
+
+      </div>
+    </div>
+
+    <!-- 下段: ナビゲーションバー（白背景・黒文字） -->
+    <div class="header-nav">
+      <div class="header-inner-nav">
+        <nav class="site-nav" id="site-nav">
+          <ul>
+            <li><a href="index.html" class="nav-active">ホーム</a></li>
+            <li><a href="#game">ゲーム</a></li>
+            <li><a href="#it">IT<span class="nav-dropdown-arrow">▾</span></a></li>
+            <li><a href="#">動画編集</a></li>
+            <li><a href="#fx">FX</a></li>
+            <li><a href="#">つぶやき</a></li>
+            <li><a href="#other">その他</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+            <li>
+              <a href="#" aria-label="検索">
+                <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none">
+                  <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- ============ AdSense スペース（ヘッダー下） ============ -->
+  <div class="adsense-header" aria-hidden="true">
+    <!-- AdSense 広告スペース (728x90 / レスポンシブ) -->
+    <span>Ad Space</span>
+  </div>
+
+  <!-- ============ メインコンテンツ ============ -->
+  <main class="site-main">
+
+    <!-- ヒーロー -->
+    <section class="hero">
+      <h1 class="hero-title">ゲーム・ツールのTips集</h1>
+      <p class="hero-desc">小さなバグ修正、Windows互換性の問題、面倒ごとをサクッと解決するメモブログ。</p>
+    </section>
+
+    <!-- カテゴリフィルター -->
+    <div class="category-filter" id="category-filter">
+      <button class="filter-btn active" data-category="all">すべて</button>
+      <button class="filter-btn" data-category="game">ゲーム</button>
+      <button class="filter-btn" data-category="it">IT</button>
+      <button class="filter-btn" data-category="fx">FX</button>
+      <button class="filter-btn" data-category="other">その他</button>
+    </div>
+
+    <!-- 記事一覧 -->
+    <h2 class="section-title">最新の記事</h2>
+
+    <div class="articles-grid" id="articles-grid">
+
+      <!-- 記事カード 1 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-date">2020/02/17</span>
+        </div>
+        <h3 class="card-title">
+          <a href="article.html">The Escapists 2 日本語化の方法</a>
+        </h3>
+        <p class="card-excerpt">
+          Steam版 The Escapists 2 を日本語化するための手順を解説。有志翻訳パッチの適用方法と、バージョン違いで起きやすいトラブルへの対処も紹介します。
+        </p>
+        <div class="card-footer">
+          <a href="article.html" class="read-more">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事カード 2 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-date">2020/02/03</span>
+        </div>
+        <h3 class="card-title">
+          <a href="#">Geforce Experienceでカーソルが表示されない時の対処法</a>
+        </h3>
+        <p class="card-excerpt">
+          Geforce Experience のオーバーレイ機能使用中にマウスカーソルが消える問題。ドライバーの設定変更とレジストリ修正で解決した手順をまとめました。
+        </p>
+        <div class="card-footer">
+          <a href="#" class="read-more">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事カード 3 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-date">2019/12/05</span>
+        </div>
+        <h3 class="card-title">
+          <a href="#">Oxygen Not Included ボーダーレスウィンドウ化</a>
+        </h3>
+        <p class="card-excerpt">
+          ONI をフルスクリーンではなくボーダーレスウィンドウで動かす設定方法。マルチモニター環境での作業効率が大幅に上がります。
+        </p>
+        <div class="card-footer">
+          <a href="#" class="read-more">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事カード 4 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-date">2018/07/20</span>
+        </div>
+        <h3 class="card-title">
+          <a href="#">OpenCVのcoreライブラリMatについて</a>
+        </h3>
+        <p class="card-excerpt">
+          OpenCV の中心データ構造 Mat の基本的な使い方と、よくある落とし穴をまとめたメモ。画像処理を始めるための最初の一歩として。
+        </p>
+        <div class="card-footer">
+          <a href="#" class="read-more">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事カード 5 -->
+      <article class="article-card" data-category="fx">
+        <div class="card-thumbnail card-thumb-fx">
+          <span class="card-thumb-icon">📈</span>
+          <span class="badge badge-fx card-thumb-badge">FX</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-date">2018/05/08</span>
+        </div>
+        <h3 class="card-title">
+          <a href="#">FX途中経過 2018年5月</a>
+        </h3>
+        <p class="card-excerpt">
+          2018年5月時点のFXトレード成績と反省点。ドル円中心の取引で学んだこと、失敗したポイントを正直にまとめました。
+        </p>
+        <div class="card-footer">
+          <a href="#" class="read-more">続きを読む →</a>
+        </div>
+      </article>
+
+      <!-- 記事カード 6 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-date">2018/08/01</span>
+        </div>
+        <h3 class="card-title">
+          <a href="#">DungeonWarfare2 14時間プレイレビュー</a>
+        </h3>
+        <p class="card-excerpt">
+          タワーディフェンス系インディーゲーム Dungeon Warfare 2 を14時間遊んだ感想。歯応えのある難易度と豊富なトラップ種類が魅力。
+        </p>
+        <div class="card-footer">
+          <a href="#" class="read-more">続きを読む →</a>
+        </div>
+      </article>
+
+
+      <!-- 記事カード 7 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2021/03/12</span></div>
+        <h3 class="card-title"><a href="#">Steam版Stardew Valleyのセーブデータ移行方法</a></h3>
+        <p class="card-excerpt">PCを買い替えた際のStardew Valleyセーブデータの移行手順。AppDataフォルダの場所と、クラウドセーブとローカルセーブの違いも解説。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 8 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2019/05/14</span></div>
+        <h3 class="card-title"><a href="#">Python3.xでOpenCVのインストールに失敗する場合の対処</a></h3>
+        <p class="card-excerpt">pip install opencv-python でエラーになる原因と解決策。Visual C++ Redistributableの不足やPythonバージョンの不一致が主な原因。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 9 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2020/09/08</span></div>
+        <h3 class="card-title"><a href="#">Minecraftが起動しない時の対処法（Java版）</a></h3>
+        <p class="card-excerpt">ランチャーは開くのにゲームが起動しない問題の解決策。Javaの再インストール、グラフィックドライバーの更新、ログファイルの確認方法まで。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 10 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2021/06/05</span></div>
+        <h3 class="card-title"><a href="#">WSL2でDockerを動かす最短セットアップ手順</a></h3>
+        <p class="card-excerpt">Windows 10/11でWSL2とDocker Desktopを連携させる手順。BIOSの仮想化設定からdocker runまでをスクリーンショット付きで解説。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 11 -->
+      <article class="article-card" data-category="fx">
+        <div class="card-thumbnail card-thumb-fx">
+          <span class="card-thumb-icon">📈</span>
+          <span class="badge badge-fx card-thumb-badge">FX</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2018/08/30</span></div>
+        <h3 class="card-title"><a href="#">FX途中経過 2018年8月 夏相場の振り返り</a></h3>
+        <p class="card-excerpt">2018年8月のトレード成績まとめ。トルコリラショックに巻き込まれた失敗談と、夏の薄商いでの動き方を反省を交えて記録。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 12 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2020/06/15</span></div>
+        <h3 class="card-title"><a href="#">RimWorldのおすすめMod構成2020年版</a></h3>
+        <p class="card-excerpt">安定して動くRimWorldのMod構成を紹介。HugsLib必須Modから快適プレイに欠かせないUI改善Modまで、競合しない組み合わせを厳選。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 13 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2020/08/17</span></div>
+        <h3 class="card-title"><a href="#">Gitのコンフリクトを落ち着いて解消する方法</a></h3>
+        <p class="card-excerpt">git mergeやgit rebase後のコンフリクトマーカーの読み方と解消手順。VSCodeのマージエディタを使ったビジュアルな解決方法も紹介。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 14 -->
+      <article class="article-card" data-category="other">
+        <div class="card-thumbnail card-thumb-other">
+          <span class="card-thumb-icon">📝</span>
+          <span class="badge badge-other card-thumb-badge">その他</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2019/08/25</span></div>
+        <h3 class="card-title"><a href="#">格安SIMでテザリングが使えない時の設定確認手順</a></h3>
+        <p class="card-excerpt">IIJmio・楽天モバイル等でテザリングが繋がらない原因と対処法。APNの設定ミスとキャリアAPN問題の切り分け方を手順ごとに解説。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 15 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2019/11/20</span></div>
+        <h3 class="card-title"><a href="#">Factorioで工場が詰まる原因と解決策</a></h3>
+        <p class="card-excerpt">ベルトやインサーターが止まって生産ラインが詰まる問題の原因究明と対策。デッドロックの見つけ方とサーキットネットワーク活用法。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 16 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2019/02/28</span></div>
+        <h3 class="card-title"><a href="#">Windows 10でPATH環境変数を正しく設定する</a></h3>
+        <p class="card-excerpt">コマンドプロンプトで「'python' は内部コマンドまたは外部コマンド…」と出る場合の対処。システム変数とユーザー変数の違いも説明。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 17 -->
+      <article class="article-card" data-category="fx">
+        <div class="card-thumbnail card-thumb-fx">
+          <span class="card-thumb-icon">📈</span>
+          <span class="badge badge-fx card-thumb-badge">FX</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2019/04/11</span></div>
+        <h3 class="card-title"><a href="#">MT4のEAをデモ口座で動かすまでの手順</a></h3>
+        <p class="card-excerpt">MetaTrader 4でエキスパートアドバイザーをデモ口座にセットアップする手順。DLL許可の設定とバックテストのやり方もまとめて解説。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 18 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2020/11/03</span></div>
+        <h3 class="card-title"><a href="#">Among Usのラグを改善する方法</a></h3>
+        <p class="card-excerpt">Among Usで部屋が重い・落ちる場合の対処。ホストのサーバー選択と帯域幅設定、Windows側のQoSパケットスケジューラ無効化の手順。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 19 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2020/12/10</span></div>
+        <h3 class="card-title"><a href="#">VSCodeでPythonの補完が効かない時の設定</a></h3>
+        <p class="card-excerpt">Pylanceが動いているのにコード補完が出ない・遅い場合の設定確認。仮想環境のパス指定とPython: Select Interpreterの使い方。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 20 -->
+      <article class="article-card" data-category="other">
+        <div class="card-thumbnail card-thumb-other">
+          <span class="card-thumb-icon">📝</span>
+          <span class="badge badge-other card-thumb-badge">その他</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2020/07/14</span></div>
+        <h3 class="card-title"><a href="#">Amazonプライムビデオをテレビで見る一番簡単な方法</a></h3>
+        <p class="card-excerpt">Fire TV Stick・Chromecast・スマートテレビそれぞれの接続方法を比較。初期設定から視聴開始まで最短手順でまとめました。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 21 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2019/07/22</span></div>
+        <h3 class="card-title"><a href="#">Hollow KnightがWindowsで起動しない問題を解決</a></h3>
+        <p class="card-excerpt">Hollow Knightがクラッシュする・黒画面のまま進まない場合の対処。.NET Frameworkの修復と、セーブデータバックアップの場所も紹介。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 22 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2021/04/22</span></div>
+        <h3 class="card-title"><a href="#">ffmpegで動画を一括変換するバッチファイル</a></h3>
+        <p class="card-excerpt">フォルダ内のmp4をすべてH.265に変換するWindowsバッチファイルの書き方。ffmpegのパス設定からfor文の使い方まで丁寧に解説。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 23 -->
+      <article class="article-card" data-category="fx">
+        <div class="card-thumbnail card-thumb-fx">
+          <span class="card-thumb-icon">📈</span>
+          <span class="badge badge-fx card-thumb-badge">FX</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2020/02/19</span></div>
+        <h3 class="card-title"><a href="#">ドル円スキャルピングで意識するラインの引き方</a></h3>
+        <p class="card-excerpt">短期トレードで機能しやすい水平線・トレンドラインの引き方。前日高安・週足ラインの使い方と、ダマしに引っかからないための確認ポイント。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 24 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2021/01/18</span></div>
+        <h3 class="card-title"><a href="#">Terraria多人数プレイのポート開放手順</a></h3>
+        <p class="card-excerpt">Terrariaでホストしてフレンドを招待できない場合のルーター設定。ポート7777番の開放方法とWindowsファイアウォールの例外追加手順。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 25 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2018/11/09</span></div>
+        <h3 class="card-title"><a href="#">Raspberry Piに最小構成でSambaを立てる</a></h3>
+        <p class="card-excerpt">Raspberry Pi 3BにSambaをインストールしてWindowsから共有フォルダにアクセスする最小手順。smb.confの設定例とユーザー追加方法。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 26 -->
+      <article class="article-card" data-category="other">
+        <div class="card-thumbnail card-thumb-other">
+          <span class="card-thumb-icon">📝</span>
+          <span class="badge badge-other card-thumb-badge">その他</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2021/05/03</span></div>
+        <h3 class="card-title"><a href="#">ブログのGoogle Search Consoleを初期設定する手順</a></h3>
+        <p class="card-excerpt">新しいブログをSearch Consoleに登録してインデックスを促進するまでの手順。サイトマップの送信とカバレッジのエラー確認方法も解説。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 27 -->
+      <article class="article-card" data-category="game">
+        <div class="card-thumbnail card-thumb-game">
+          <span class="card-thumb-icon">🎮</span>
+          <span class="badge badge-game card-thumb-badge">ゲーム</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2020/04/30</span></div>
+        <h3 class="card-title"><a href="#">Slay the Spireがフリーズする場合の対処</a></h3>
+        <p class="card-excerpt">Slay the Spireがロード中やカード選択時にフリーズする問題の解決法。Java設定のリセットとModの競合確認、セーブデータのリペア手順。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 28 -->
+      <article class="article-card" data-category="it">
+        <div class="card-thumbnail card-thumb-it">
+          <span class="card-thumb-icon">💻</span>
+          <span class="badge badge-it card-thumb-badge">IT</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2019/09/03</span></div>
+        <h3 class="card-title"><a href="#">Node.jsのバージョン管理にnvmを使う手順</a></h3>
+        <p class="card-excerpt">WindowsでNode.jsを複数バージョン切り替えるnvm-windowsの導入方法。既存のNode.jsをアンインストールしてからセットアップする順序が重要。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 29 -->
+      <article class="article-card" data-category="fx">
+        <div class="card-thumbnail card-thumb-fx">
+          <span class="card-thumb-icon">📈</span>
+          <span class="badge badge-fx card-thumb-badge">FX</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2021/02/08</span></div>
+        <h3 class="card-title"><a href="#">FX自動売買ツールのバックテスト結果報告</a></h3>
+        <p class="card-excerpt">MT4のEAをドル円1時間足で2年間バックテストした結果と考察。最大ドローダウンと損益曲線の読み方、最適化のやりすぎに注意する理由。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+      <!-- 記事カード 30 -->
+      <article class="article-card" data-category="other">
+        <div class="card-thumbnail card-thumb-other">
+          <span class="card-thumb-icon">📝</span>
+          <span class="badge badge-other card-thumb-badge">その他</span>
+        </div>
+        <div class="card-meta"><span class="card-date">2019/12/01</span></div>
+        <h3 class="card-title"><a href="#">iPhoneのストレージが急に減った時に確認すること</a></h3>
+        <p class="card-excerpt">iPhoneのストレージが突然いっぱいになる原因の調べ方。写真・iMessageのキャッシュ・オフラインマップの削除手順と、iCloud活用による節約方法。</p>
+        <div class="card-footer"><a href="#" class="read-more">続きを読む →</a></div>
+      </article>
+
+    </div><!-- /.articles-grid -->
+
+    <!-- ページネーション -->
+    <nav class="pagination" aria-label="ページナビゲーション">
+      <button class="page-btn active" aria-current="page">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">→</button>
+    </nav>
+
+  </main><!-- /.site-main -->
+
+  <!-- 無限スクロール センチネル -->
+  <div id="infinite-scroll-sentinel" aria-hidden="true"></div>
+
+  <!-- ============ TOPに戻るボタン ============ -->
+  <button id="scroll-top" class="scroll-top-btn" aria-label="TOPに戻る">▲</button>
+
+  <!-- ============ フッター ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-links">
+        <a href="index.html">ホーム</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+      <p class="footer-copy">© 2018–2024 一留底辺ブログ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
