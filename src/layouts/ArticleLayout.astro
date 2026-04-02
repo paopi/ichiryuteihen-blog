@@ -1,0 +1,87 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  category: string;
+  date: Date;
+  prev?: { slug: string; title: string } | null;
+  next?: { slug: string; title: string } | null;
+}
+
+const { title, description, category, date, prev, next } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const categoryBadgeClass: Record<string, string> = {
+  'ゲーム': 'badge-game',
+  'IT': 'badge-it',
+  'FX': 'badge-fx',
+  'その他': 'badge-other',
+};
+
+const badgeClass = categoryBadgeClass[category] ?? 'badge-other';
+
+const formattedDate = date.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} - 一留底辺ブログ`} description={description}>
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href={`${base}/`}>ホーム</a>
+    <span class="breadcrumb-sep">›</span>
+    <span>{category}</span>
+    <span class="breadcrumb-sep">›</span>
+    <span>{title}</span>
+  </nav>
+
+  <!-- 記事本体 -->
+  <main>
+    <article class="article-page">
+
+      <!-- 記事ヘッダー -->
+      <header class="article-header">
+        <span class={`badge ${badgeClass}`}>{category}</span>
+        <h1 class="article-title">{title}</h1>
+        <div class="article-info">
+          <span>📅 {formattedDate}</span>
+          <span>✍️ 一留</span>
+          <span>⏱ 約3分で読めます</span>
+        </div>
+      </header>
+
+      <!-- AdSense サイドスペース -->
+      <div class="adsense-side" aria-hidden="true">
+        <span>Ad Space (300×250)</span>
+      </div>
+
+      <!-- 記事本文 -->
+      <div class="article-body">
+        <slot />
+      </div>
+
+      <!-- 記事ナビ -->
+      {(prev || next) && (
+        <nav class="article-nav" aria-label="前後の記事">
+          {prev && (
+            <a href={`${base}/posts/${prev.slug}`}>
+              <span class="nav-label">← 前の記事</span>
+              {prev.title}
+            </a>
+          )}
+          {next && (
+            <a href={`${base}/posts/${next.slug}`}>
+              <span class="nav-label">次の記事 →</span>
+              {next.title}
+            </a>
+          )}
+        </nav>
+      )}
+
+    </article>
+  </main>
+</BaseLayout>

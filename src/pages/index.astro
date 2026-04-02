@@ -1,0 +1,161 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const base = import.meta.env.BASE_URL;
+
+const categoryIcons: Record<string, string> = {
+  'ゲーム': '🎮',
+  'IT': '💻',
+  'FX': '📈',
+  'その他': '📝',
+};
+
+const categoryThumb: Record<string, string> = {
+  'ゲーム': 'card-thumb-game',
+  'IT': 'card-thumb-it',
+  'FX': 'card-thumb-fx',
+  'その他': 'card-thumb-other',
+};
+
+const categoryBadge: Record<string, string> = {
+  'ゲーム': 'badge-game',
+  'IT': 'badge-it',
+  'FX': 'badge-fx',
+  'その他': 'badge-other',
+};
+---
+
+<BaseLayout title="一留底辺ブログ - ゲーム・IT・FXのTips集">
+  <main class="site-main">
+
+    <!-- ヒーロー -->
+    <section class="hero">
+      <h1 class="hero-title">ゲーム・ツールのTips集</h1>
+      <p class="hero-desc">小さなバグ修正、Windows互換性の問題、面倒ごとをサクッと解決するメモブログ。</p>
+    </section>
+
+    <!-- カテゴリフィルター -->
+    <div class="category-filter" id="category-filter">
+      <button class="filter-btn active" data-category="all">すべて</button>
+      <button class="filter-btn" data-category="ゲーム">ゲーム</button>
+      <button class="filter-btn" data-category="IT">IT</button>
+      <button class="filter-btn" data-category="FX">FX</button>
+      <button class="filter-btn" data-category="その他">その他</button>
+    </div>
+
+    <!-- 記事一覧 -->
+    <h2 class="section-title">最新の記事</h2>
+
+    <div class="articles-grid" id="articles-grid">
+      {sortedPosts.map((post) => {
+        const cat = post.data.category;
+        const icon = categoryIcons[cat] ?? '📝';
+        const thumb = categoryThumb[cat] ?? 'card-thumb-other';
+        const badge = categoryBadge[cat] ?? 'badge-other';
+        const dateStr = post.data.date.toLocaleDateString('ja-JP');
+        return (
+          <article class="article-card" data-category={cat}>
+            <div class={`card-thumbnail ${thumb}`}>
+              <span class="card-thumb-icon">{icon}</span>
+              <span class={`badge ${badge} card-thumb-badge`}>{cat}</span>
+            </div>
+            <div class="card-meta">
+              <span class="card-date">{dateStr}</span>
+            </div>
+            <h3 class="card-title">
+              <a href={`${base}/posts/${post.id}`}>{post.data.title}</a>
+            </h3>
+            <p class="card-excerpt">{post.data.description}</p>
+            <div class="card-footer">
+              <a href={`${base}/posts/${post.id}`} class="read-more">続きを読む →</a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- 無限スクロール sentinel -->
+    <div id="infinite-scroll-sentinel" style="height: 1px;"></div>
+
+  </main>
+
+  <script>
+    // カテゴリフィルター + 無限スクロール
+    (function initArticles() {
+      const filterArea = document.getElementById('category-filter');
+      const grid = document.getElementById('articles-grid');
+      const sentinel = document.getElementById('infinite-scroll-sentinel');
+      if (!grid) return;
+
+      const PAGE_SIZE = 9;
+      const allCards = Array.from(grid.querySelectorAll('.article-card')) as HTMLElement[];
+      let currentCategory = 'all';
+      let loadedCount = 0;
+
+      function getFiltered() {
+        return allCards.filter(function (card) {
+          return currentCategory === 'all' || card.dataset.category === currentCategory;
+        });
+      }
+
+      function loadMore() {
+        const filtered = getFiltered();
+        const batch = filtered.slice(loadedCount, loadedCount + PAGE_SIZE);
+        batch.forEach(function (card) {
+          card.style.display = '';
+          card.classList.remove('card-fade-in');
+          void card.offsetWidth;
+          card.classList.add('card-fade-in');
+        });
+        loadedCount += batch.length;
+      }
+
+      function resetAndLoad(category: string) {
+        currentCategory = category;
+        loadedCount = 0;
+        allCards.forEach(function (card) {
+          card.style.display = 'none';
+          card.classList.remove('card-fade-in');
+        });
+        loadMore();
+      }
+
+      resetAndLoad('all');
+
+      if (filterArea) {
+        const buttons = filterArea.querySelectorAll('.filter-btn');
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            buttons.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            resetAndLoad((btn as HTMLButtonElement).getAttribute('data-category') ?? 'all');
+          });
+        });
+      }
+
+      if (!sentinel || !window.IntersectionObserver) return;
+
+      let scrollEnabled = false;
+
+      window.addEventListener('scroll', function onFirstScroll() {
+        scrollEnabled = true;
+        window.removeEventListener('scroll', onFirstScroll);
+      }, { passive: true });
+
+      const observer = new IntersectionObserver(function (entries) {
+        if (!scrollEnabled) return;
+        if (!entries[0].isIntersecting) return;
+        const filtered = getFiltered();
+        if (loadedCount < filtered.length) {
+          loadMore();
+        }
+      }, { rootMargin: '0px' });
+
+      observer.observe(sentinel);
+    })();
+  </script>
+</BaseLayout>
