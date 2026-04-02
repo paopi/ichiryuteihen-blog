@@ -75,6 +75,19 @@
   --color-nav-link-active-border: #999999;
 }
 
+/* --- Shiki デュアルテーマ対応 --- */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+}
+
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
 /* --- リセット & ベース --- */
 *, *::before, *::after {
   box-sizing: border-box;
