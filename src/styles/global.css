@@ -458,6 +458,17 @@ img {
   flex-shrink: 0;
 }
 
+/* サムネイル画像付きカード */
+.card-thumb-image {
+  padding: 0;
+}
+
+.card-thumb-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* カテゴリ別グラデーション */
 .card-thumb-game {
   background: linear-gradient(135deg, #4a90e2 0%, #1a5e9a 100%);
