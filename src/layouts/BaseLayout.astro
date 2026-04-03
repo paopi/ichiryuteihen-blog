@@ -4,10 +4,15 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
 }
 
-const { title, description = 'ゲーム・ツールの小さなバグ修正、Windows互換性問題の解消、小さな面倒ごとを解消するTips集。' } = Astro.props;
+const { title, description = 'ゲーム・ツールの小さなバグ修正、Windows互換性問題の解消、小さな面倒ごとを解消するTips集。', ogImage, ogType = 'website' } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const siteUrl = import.meta.env.SITE ?? 'https://paopi.github.io';
+const pageUrl = `${siteUrl}${Astro.url.pathname}`;
+const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}${base}/favicon.svg`;
 ---
 
 <!DOCTYPE html>
@@ -17,6 +22,19 @@ const base = import.meta.env.BASE_URL;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content={description}>
   <title>{title}</title>
+  <!-- OGP -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={pageUrl} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:site_name" content="一留底辺ブログ" />
+  <meta property="og:locale" content="ja_JP" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
   <script is:inline>
     (function(){var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();
   </script>
