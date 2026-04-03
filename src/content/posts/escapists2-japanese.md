@@ -5,6 +5,8 @@ category: "ゲーム"
 description: "Steam版 The Escapists 2 を日本語化する方法。有志翻訳パッチの適用手順と、よくあるトラブル対処法をわかりやすく解説します。"
 tags: ["Steam", "日本語化", "The Escapists 2"]
 thumbnail: "../../assets/game_joho.png"
+thumb:
+  motif: "localize"
 ---
 
 Steam で購入した **The Escapists 2** は残念ながら公式の日本語対応がありません。

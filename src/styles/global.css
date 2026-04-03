@@ -363,20 +363,21 @@ img {
 /* ヒーローセクション */
 .hero {
   margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--color-border);
 }
 
 .hero-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--color-text-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .hero-desc {
   color: var(--color-text-secondary);
   font-size: 0.95rem;
+  line-height: 1.7;
 }
 
 /* カテゴリフィルター */
@@ -384,20 +385,21 @@ img {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0;
+  gap: 0.5rem;
   margin-bottom: 2rem;
 }
 
 .filter-btn {
   background: none;
-  border: none;
-  padding: 0.2rem 0.1rem;
-  font-size: 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  color: #555555;
+  color: var(--color-text-secondary);
   font-family: var(--font-family);
-  font-weight: 400;
-  transition: color var(--transition);
+  font-weight: 500;
+  transition: all var(--transition);
   line-height: 1.4;
 }
 
@@ -410,17 +412,11 @@ img {
 }
 
 .filter-btn.active {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-text-primary);
-}
-
-/* ドット区切り（最後以外に付加） */
-.filter-btn:not(:last-child)::after {
-  content: "・";
-  color: #bbbbbb;
-  pointer-events: none;
-  margin-left: 0.25rem;
-  font-weight: 400;
+  background: var(--color-bg-card);
+  border-color: var(--color-accent);
+  box-shadow: 0 1px 3px var(--color-shadow);
 }
 
 /* セクションタイトル */
@@ -448,12 +444,14 @@ img {
   background-color: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  padding: 1.25rem;
+  padding: 1.25rem 1.25rem 0.75rem;
+  box-shadow: 0 1px 4px var(--color-shadow);
   transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0;
   overflow: hidden;
+  height: 100%;
 }
 
 .article-card:hover {
@@ -462,72 +460,119 @@ img {
   border-color: var(--color-accent);
 }
 
-/* --- カードサムネイル --- */
-.card-thumbnail {
-  /* カードのpadding(1.25rem)を打ち消して端まで広げる */
+/* --- エディトリアルサムネイル --- */
+.editorial-thumb {
   margin: -1.25rem -1.25rem 0;
-  height: 170px;
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  aspect-ratio: 2 / 1;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  background: var(--thumb-bg-dark);
+  color: var(--thumb-accent-dark);
+}
+
+[data-theme="light"] .editorial-thumb {
+  background: var(--thumb-bg-light);
+  color: var(--thumb-accent-light);
+}
+
+[data-theme="light"] .motif {
+  opacity: 1;
+}
+
+
+/* --- 画像サムネイル --- */
+.card-thumbnail-image {
+  margin: -1.25rem -1.25rem 0;
+  aspect-ratio: 2 / 1;
   position: relative;
   overflow: hidden;
-  flex-shrink: 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
-/* サムネイル画像付きカード */
-.card-thumb-image {
-  padding: 0;
-}
-
-.card-thumb-image img {
+.card-thumbnail-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* カテゴリ別グラデーション */
-.card-thumb-game {
-  background: linear-gradient(135deg, #4a90e2 0%, #1a5e9a 100%);
-}
-
-.card-thumb-it {
-  background: linear-gradient(135deg, #43b97c 0%, #1a7a4a 100%);
-}
-
-.card-thumb-fx {
-  background: linear-gradient(135deg, #f5a623 0%, #c96a10 100%);
-}
-
-.card-thumb-other {
-  background: linear-gradient(135deg, #9b59b6 0%, #6c3483 100%);
-}
-
-/* サムネイル絵文字アイコン */
-.card-thumb-icon {
-  font-size: 3.25rem;
-  line-height: 1;
-  opacity: 0.9;
-  user-select: none;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
-}
-
-/* バッジをサムネイル左上に重ねる */
-.card-thumb-badge {
+.editorial-eyebrow {
   position: absolute;
-  top: 0.625rem;
-  left: 0.625rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  bottom: 8px;
+  left: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(4px);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  z-index: 1;
 }
 
-/* サムネイルあり時のcard-metaはバッジなし・日付のみ */
-.card-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+[data-theme="light"] .editorial-eyebrow {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid currentColor;
+  color: inherit;
 }
+
+.motif {
+  width: 64px;
+  height: 64px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* --- カードメタ（エディトリアル版） --- */
+.card-meta {
+  padding: 10px 12px 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-meta .card-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 0 0 8px;
+}
+
+.card-meta .card-excerpt {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0 0 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.card-meta .card-date {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.card-meta .read-more {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
 
 .card-title {
   font-size: 1rem;

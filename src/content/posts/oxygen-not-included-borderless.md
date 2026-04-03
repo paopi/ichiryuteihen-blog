@@ -4,6 +4,8 @@ date: 2019-12-05
 category: "ゲーム"
 description: "ONI をフルスクリーンではなくボーダーレスウィンドウで動かす設定方法。マルチモニター環境での作業効率が大幅に上がります。"
 tags: ["Oxygen Not Included", "ONI", "ウィンドウモード"]
+thumb:
+  motif: "window-borderless"
 ---
 
 Oxygen Not Included（ONI）をフルスクリーンで遊んでいると、Alt+Tab での切り替えが遅かったり、マルチモニター環境での作業が不便に感じることがあります。

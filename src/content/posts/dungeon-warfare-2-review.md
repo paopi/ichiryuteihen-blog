@@ -4,6 +4,8 @@ date: 2018-08-01
 category: "ゲーム"
 description: "タワーディフェンス系インディーゲーム Dungeon Warfare 2 を14時間遊んだ感想。歯応えのある難易度と豊富なトラップ種類が魅力。"
 tags: ["Dungeon Warfare 2", "タワーディフェンス", "Steam", "インディーゲーム"]
+thumb:
+  motif: "tower-trap"
 ---
 
 Steam のセール中に購入した **Dungeon Warfare 2**。

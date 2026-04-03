@@ -1,0 +1,135 @@
+---
+/**
+ * 記事サムネイルのSVGモチーフ
+ * currentColor ベースでテーマ対応
+ * 外枠: fill(薄) と stroke(くっきり) を分離
+ */
+interface Props {
+  motif: string;
+  accent: string;
+}
+
+const { motif } = Astro.props;
+---
+
+{motif === 'save-folder' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <path d="M14 36 Q14 22 28 22 L72 22 Q86 22 86 36 L86 56 Q86 70 72 70 L28 70 Q14 70 14 56Z" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="36" cy="46" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+  <path d="M36 40v12M30 46h12" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="68" cy="40" r="3.5" fill="currentColor"/>
+  <circle cx="62" cy="50" r="3.5" fill="currentColor" fill-opacity="0.7"/>
+  <circle cx="74" cy="50" r="3.5" fill="currentColor" fill-opacity="0.6"/>
+  <circle cx="68" cy="58" r="3.5" fill="currentColor" fill-opacity="0.7"/>
+  <path d="M40 18h-6v-4M60 18h6v-4" stroke="currentColor" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
+</svg>
+)}
+
+{motif === 'app-error' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <rect x="28" y="14" width="44" height="64" rx="6" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2.5"/>
+  <rect x="34" y="22" width="32" height="36" rx="3" fill="currentColor" fill-opacity="0.08"/>
+  <path d="M42 42l6 6 10-14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="50" cy="68" r="3.5" stroke="currentColor" stroke-width="2" fill="none"/>
+</svg>
+)}
+
+{motif === 'localize' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <circle cx="50" cy="46" r="28" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-width="2.5"/>
+  <path d="M38 38h24M50 32v20" stroke="currentColor" stroke-width="2"/>
+  <text x="50" y="78" text-anchor="middle" font-family="sans-serif" font-size="14" fill="currentColor" font-weight="500">あ</text>
+</svg>
+)}
+
+{motif === 'window-borderless' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <rect x="18" y="20" width="64" height="48" rx="5" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="18" y1="32" x2="82" y2="32" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="26" cy="26" r="2" fill="currentColor"/>
+  <circle cx="32" cy="26" r="2" fill="currentColor" fill-opacity="0.7"/>
+  <circle cx="38" cy="26" r="2" fill="currentColor" fill-opacity="0.5"/>
+  <rect x="24" y="38" width="52" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <path d="M60 74l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+)}
+
+{motif === 'tower-trap' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <rect x="38" y="18" width="24" height="54" rx="4" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2.5"/>
+  <rect x="34" y="72" width="32" height="8" rx="3" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="2"/>
+  <path d="M44 36h12M44 46h12M44 56h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="50" cy="26" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
+  <path d="M26 60l8-8M74 60l-8-8" stroke="currentColor" stroke-width="2" stroke-opacity="0.6" stroke-linecap="round"/>
+  <circle cx="22" cy="64" r="4" fill="currentColor" fill-opacity="0.4"/>
+  <circle cx="78" cy="64" r="4" fill="currentColor" fill-opacity="0.4"/>
+</svg>
+)}
+
+{motif === 'browser-capture' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <rect x="22" y="18" width="56" height="44" rx="5" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="22" y1="30" x2="78" y2="30" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="28" cy="24" r="2" fill="currentColor"/>
+  <circle cx="34" cy="24" r="2" fill="currentColor" fill-opacity="0.7"/>
+  <circle cx="40" cy="24" r="2" fill="currentColor" fill-opacity="0.5"/>
+  <rect x="28" y="36" width="22" height="3" rx="1" fill="currentColor" fill-opacity="0.4"/>
+  <rect x="28" y="43" width="16" height="3" rx="1" fill="currentColor" fill-opacity="0.3"/>
+  <path d="M62 54 L74 66" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <rect x="56" y="48" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"/>
+</svg>
+)}
+
+{motif === 'terminal' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <rect x="18" y="20" width="64" height="52" rx="6" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="18" y1="34" x2="82" y2="34" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="26" cy="27" r="2" fill="currentColor"/>
+  <circle cx="32" cy="27" r="2" fill="currentColor" fill-opacity="0.7"/>
+  <circle cx="38" cy="27" r="2" fill="currentColor" fill-opacity="0.5"/>
+  <path d="M28 44l8 8-8 8" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44 58h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+)}
+
+{motif === 'cursor-missing' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <rect x="18" y="18" width="64" height="44" rx="5" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-width="2.5"/>
+  <rect x="38" y="66" width="24" height="4" rx="2" fill="currentColor" fill-opacity="0.5"/>
+  <rect x="44" y="62" width="12" height="4" rx="1" fill="currentColor" fill-opacity="0.4"/>
+  <path d="M44 38l4 14h-8z" fill="currentColor" fill-opacity="0.3" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="56" y1="32" x2="68" y2="44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="62" y1="32" x2="68" y2="38" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+)}
+
+{motif === 'matrix-grid' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <rect x="20" y="20" width="60" height="52" rx="4" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="40" y1="20" x2="40" y2="72" stroke="currentColor" stroke-width="1" stroke-opacity="0.4"/>
+  <line x1="60" y1="20" x2="60" y2="72" stroke="currentColor" stroke-width="1" stroke-opacity="0.4"/>
+  <line x1="20" y1="38" x2="80" y2="38" stroke="currentColor" stroke-width="1" stroke-opacity="0.4"/>
+  <line x1="20" y1="55" x2="80" y2="55" stroke="currentColor" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="30" y="33" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor">0</text>
+  <text x="50" y="33" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor" fill-opacity="0.8">1</text>
+  <text x="70" y="33" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor" fill-opacity="0.7">0</text>
+  <text x="30" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor" fill-opacity="0.8">1</text>
+  <text x="50" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor">1</text>
+  <text x="70" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor" fill-opacity="0.8">0</text>
+  <text x="30" y="67" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor" fill-opacity="0.7">1</text>
+  <text x="50" y="67" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor" fill-opacity="0.8">0</text>
+  <text x="70" y="67" text-anchor="middle" font-family="monospace" font-size="10" fill="currentColor">1</text>
+</svg>
+)}
+
+{motif === 'candlestick' && (
+<svg viewBox="0 0 100 100" class="motif">
+  <line x1="20" y1="76" x2="80" y2="76" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="34" y1="20" x2="34" y2="60" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.4"/>
+  <rect x="28" y="30" width="12" height="22" rx="2" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="2"/>
+  <line x1="52" y1="24" x2="52" y2="68" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.4"/>
+  <rect x="46" y="34" width="12" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+  <line x1="70" y1="28" x2="70" y2="64" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.4"/>
+  <rect x="64" y="38" width="12" height="20" rx="2" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="2"/>
+</svg>
+)}

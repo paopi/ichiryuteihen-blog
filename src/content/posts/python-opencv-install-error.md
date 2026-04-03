@@ -4,6 +4,8 @@ date: 2019-05-14
 category: "IT"
 description: "pip install opencv-python でエラーになる原因と解決策。Visual C++ Redistributableの不足やPythonバージョンの不一致が主な原因。"
 tags: ["Python", "OpenCV", "pip", "トラブルシューティング"]
+thumb:
+  motif: "terminal"
 ---
 
 `pip install opencv-python` を実行するとエラーが出る場合の対処法をまとめます。

@@ -11,6 +11,9 @@ const posts = defineCollection({
     description: z.string(),
     tags: z.array(z.string()).optional().default([]),
     thumbnail: image().optional(),
+    thumb: z.object({
+      motif: z.string(),
+    }).optional(),
   }),
 });
 

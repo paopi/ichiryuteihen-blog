@@ -1,0 +1,26 @@
+---
+/**
+ * 記事カードのエディトリアルサムネイル
+ * editorial_dark_cards_v1.html ベースのデザイン
+ */
+import ThumbMotif from './ThumbMotif.astro';
+import { categoryByLabel, fallbackCategory } from '../categories';
+
+interface Props {
+  category: string;
+  motif: string;
+}
+
+const { category, motif } = Astro.props;
+const cat = categoryByLabel[category] ?? fallbackCategory;
+---
+
+<div
+  class="editorial-thumb"
+  style={`--thumb-bg-dark:${cat.thumbBg};--thumb-bg-light:${cat.thumbBgLight};--thumb-accent-dark:${cat.thumbAccent};--thumb-accent-light:${cat.thumbAccentLight}`}
+>
+  <ThumbMotif motif={motif} accent="currentColor" />
+  <span class="editorial-eyebrow" style={`color:${cat.eyebrowColor}`}>
+    {cat.eyebrowLabel}
+  </span>
+</div>

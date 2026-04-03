@@ -4,6 +4,8 @@ date: 2021-03-12
 category: "ゲーム"
 description: "PCを買い替えた際のStardew Valleyセーブデータの移行手順。AppDataフォルダの場所と、クラウドセーブとローカルセーブの違いも解説。"
 tags: ["Stardew Valley", "セーブデータ", "Steam"]
+thumb:
+  motif: "save-folder"
 ---
 
 PCを新調したついでに Stardew Valley のセーブデータを移行しました。

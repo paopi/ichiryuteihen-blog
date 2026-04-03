@@ -4,6 +4,8 @@ date: 2018-07-20
 category: "IT"
 description: "OpenCV の中心データ構造 Mat の基本的な使い方と、よくある落とし穴をまとめたメモ。"
 tags: ["OpenCV", "C++", "Python", "画像処理"]
+thumb:
+  motif: "matrix-grid"
 ---
 
 OpenCV を使い始めたばかりのころ、`Mat` クラスの挙動に戸惑いました。

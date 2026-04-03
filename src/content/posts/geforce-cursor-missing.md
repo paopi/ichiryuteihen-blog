@@ -4,6 +4,8 @@ date: 2020-02-03
 category: "IT"
 description: "Geforce Experience のオーバーレイ機能使用中にマウスカーソルが消える問題の解決方法。"
 tags: ["Geforce Experience", "NVIDIA", "トラブルシューティング"]
+thumb:
+  motif: "cursor-missing"
 ---
 
 Geforce Experience のオーバーレイ機能（Alt+Z）を使用中に、マウスカーソルが突然消えてしまう問題に遭遇しました。
