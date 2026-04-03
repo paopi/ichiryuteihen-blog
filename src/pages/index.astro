@@ -2,32 +2,12 @@
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { categories, categoryIcon, thumbClass, badgeClass } from '../categories';
 
 const allPosts = await getCollection('posts');
 const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const base = import.meta.env.BASE_URL;
-
-const categoryIcons: Record<string, string> = {
-  'ゲーム': '🎮',
-  'IT': '💻',
-  'FX': '📈',
-  'その他': '📝',
-};
-
-const categoryThumb: Record<string, string> = {
-  'ゲーム': 'card-thumb-game',
-  'IT': 'card-thumb-it',
-  'FX': 'card-thumb-fx',
-  'その他': 'card-thumb-other',
-};
-
-const categoryBadge: Record<string, string> = {
-  'ゲーム': 'badge-game',
-  'IT': 'badge-it',
-  'FX': 'badge-fx',
-  'その他': 'badge-other',
-};
 ---
 
 <BaseLayout title="一留底辺ブログ - ゲーム・IT・FXのTips集">
@@ -42,10 +22,9 @@ const categoryBadge: Record<string, string> = {
     <!-- カテゴリフィルター -->
     <div class="category-filter" id="category-filter">
       <button class="filter-btn active" data-category="all">すべて</button>
-      <button class="filter-btn" data-category="ゲーム">ゲーム</button>
-      <button class="filter-btn" data-category="IT">IT</button>
-      <button class="filter-btn" data-category="FX">FX</button>
-      <button class="filter-btn" data-category="その他">その他</button>
+      {categories.map((c) => (
+        <button class="filter-btn" data-category={c.label}>{c.label}</button>
+      ))}
     </div>
 
     <!-- 記事一覧 -->
@@ -54,9 +33,9 @@ const categoryBadge: Record<string, string> = {
     <div class="articles-grid" id="articles-grid">
       {sortedPosts.map((post) => {
         const cat = post.data.category;
-        const icon = categoryIcons[cat] ?? '📝';
-        const thumb = categoryThumb[cat] ?? 'card-thumb-other';
-        const badge = categoryBadge[cat] ?? 'badge-other';
+        const icon = categoryIcon(cat);
+        const thumb = thumbClass(cat);
+        const badge = badgeClass(cat);
         const dateStr = post.data.date.toLocaleDateString('ja-JP');
         return (
           <article class="article-card" data-category={cat}>
