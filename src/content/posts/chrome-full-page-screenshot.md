@@ -1,7 +1,7 @@
 ---
 title: "Chromeでページ全体のスクリーンショットを撮る方法"
 date: 2026-04-03
-category: "ブラウザ"
+category: "IT"
 description: "Chrome標準機能だけでWebページ全体のスクリーンショットを撮る方法。拡張機能不要、DevToolsのコマンドパレットから一発でフルページPNGを保存できます。"
 tags: ["Chrome", "スクリーンショット", "DevTools"]
 ---
