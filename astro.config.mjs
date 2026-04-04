@@ -2,8 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://paopi.github.io',
-  base: '/ichiryuteihen-blog',
+  site: 'https://ichiryuteihen-blog.pages.dev',
   markdown: {
     shikiConfig: {
       themes: {
