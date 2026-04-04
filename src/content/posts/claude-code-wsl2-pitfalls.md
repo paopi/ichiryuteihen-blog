@@ -199,14 +199,12 @@ wsl --shutdown
 
 ## まとめ
 
-| ハマりポイント | 解決方法 |
-|---|---|
-| Node.js が古い | nvm で 22 以上をインストール |
-| sudo が使えない | 別ターミナルで実行 |
-| Sandbox で書き込み制限 | 都度許可 or settings.json で設定 |
-| gh が apt にない | 公式リポジトリを追加 |
-| ファイルが 0KB に見える | `explorer.exe .` で開く |
-| 改行コードが CRLF になる | `git config core.autocrlf input` |
-| メモリ不足 | `.wslconfig` で上限引き上げ |
+1. **Node.js が古い** → nvm で 22 以上をインストール
+2. **sudo が使えない** → 別ターミナルで実行
+3. **Sandbox で書き込み制限** → 都度許可 or settings.json で設定
+4. **gh が apt にない** → 公式リポジトリを追加
+5. **ファイルが 0KB に見える** → `explorer.exe .` で開く
+6. **改行コードが CRLF になる** → `git config core.autocrlf input`
+7. **メモリ不足** → `.wslconfig` で上限引き上げ
 
 Claude Code 自体は WSL2 で問題なく動きますが、WSL2 特有の制限との組み合わせでハマることが多いです。ほとんどは一度設定すれば二度目はないので、最初に潰しておくと快適に使えます。
