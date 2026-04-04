@@ -39,7 +39,7 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.
           <article class="article-card" data-category={cat}>
             {post.data.thumbnail ? (
               <div class="card-thumbnail-image">
-                <Image src={post.data.thumbnail} alt={post.data.title} width={400} height={200} />
+                <Image src={post.data.thumbnail} alt={post.data.title} width={800} densities={[1]} />
                 <span class="editorial-eyebrow">{(categoryByLabel[cat] ?? fallbackCategory).eyebrowLabel}</span>
               </div>
             ) : thumb ? (
