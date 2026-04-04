@@ -12,6 +12,16 @@ Windows 11 + WSL2（Ubuntu）で Claude Code を使っていて、実際にハ�
 
 公式ドキュメントには書かれていない、WSL2特有の落とし穴が多いです。
 
+## 目次
+
+1. [Node.js のバージョンが古くてインストールできない](#1-nodejs-のバージョンが古くてインストールできない)
+2. [sudo が使えない](#2-sudo-が使えない)
+3. [Sandbox でファイル書き込みが制限される](#3-sandbox-でファイル書き込みが制限される)
+4. [GitHub CLI（gh）が apt で入らない](#4-github-clighが-apt-で入らない)
+5. [WSL 側のファイルが Windows から 0KB に見える](#5-wsl-側のファイルが-windows-から-0kb-に見える)
+6. [改行コードの混在（CRLF / LF）](#6-改行コードの混在crlf--lf)
+7. [WSL2 のメモリ上限](#7-wsl2-のメモリ上限)
+
 ## 1. Node.js のバージョンが古くてインストールできない
 
 `apt install nodejs` で入る Node.js は古すぎて Claude Code が動きません。
