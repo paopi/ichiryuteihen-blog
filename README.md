@@ -1,5 +1,5 @@
 # ichiryuteihen-blog
 
-テスト用のWebページ
+ゲーム・IT・FXの個人メモブログ（Astro + Cloudflare Pages）
 
-https://paopi.github.io/ichiryuteihen-blog/
+https://ichiryuteihen-blog.pages.dev/
