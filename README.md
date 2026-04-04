@@ -1,5 +1,5 @@
 # ichiryuteihen-blog
 
-ゲーム・IT・FXの個人メモブログ（Astro + Cloudflare Pages）
+ゲーム・IT・FXの個人メモブログ（Astro + Cloudflare Pages）※テスト中
 
 https://ichiryuteihen-blog.pages.dev/
