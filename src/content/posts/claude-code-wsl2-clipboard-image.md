@@ -4,8 +4,7 @@ date: 2026-04-04
 category: "IT"
 description: "WSL2上のClaude Code CLIにWindowsのクリップボード画像を渡す方法。PowerShellスクリプトとカスタムスキルで「スクショ見て」が使えるようになります。"
 tags: ["Claude Code", "WSL2", "クリップボード", "スキル"]
-thumb:
-  motif: "terminal"
+thumbnail: "../../assets/claude-code-wsl2-clipboard-image.png"
 ---
 
 WSL2 上で Claude Code CLI を使っていると、**画像を渡す方法がない**ことに気づきます。
