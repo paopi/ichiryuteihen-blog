@@ -4,8 +4,7 @@ date: 2026-04-04
 category: "IT"
 description: "Windows 11 + WSL2でClaude Codeを使う際に実際にハマったポイントと解決方法をまとめました。sudo問題、Sandbox制限、Node.jsバージョン、改行コードなど。"
 tags: ["Claude Code", "WSL2", "環境構築", "Windows 11"]
-thumb:
-  motif: "terminal"
+thumbnail: "../../assets/claude-code-wsl2.png"
 ---
 
 Windows 11 + WSL2（Ubuntu）で Claude Code を使っていて、実際にハマったポイントとその解決方法をまとめました。
