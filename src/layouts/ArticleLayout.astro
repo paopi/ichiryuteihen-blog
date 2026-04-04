@@ -12,8 +12,6 @@ interface Props {
 }
 
 const { title, description, category, date, prev, next } = Astro.props;
-const base = import.meta.env.BASE_URL;
-
 const badgeClass = getBadgeClass(category);
 
 const formattedDate = date.toLocaleDateString('ja-JP', {
@@ -26,7 +24,7 @@ const formattedDate = date.toLocaleDateString('ja-JP', {
 <BaseLayout title={`${title} - 一留底辺ブログ`} description={description} ogType="article">
   <!-- パンくずリスト -->
   <nav class="breadcrumb" aria-label="パンくずリスト">
-    <a href={`${base}/`}>ホーム</a>
+    <a href={`/`}>ホーム</a>
     <span class="breadcrumb-sep">›</span>
     <span>{category}</span>
     <span class="breadcrumb-sep">›</span>
@@ -57,13 +55,13 @@ const formattedDate = date.toLocaleDateString('ja-JP', {
       {(prev || next) && (
         <nav class="article-nav" aria-label="前後の記事">
           {prev && (
-            <a href={`${base}/posts/${prev.slug}`}>
+            <a href={`/posts/${prev.slug}`}>
               <span class="nav-label">← 前の記事</span>
               {prev.title}
             </a>
           )}
           {next && (
-            <a href={`${base}/posts/${next.slug}`}>
+            <a href={`/posts/${next.slug}`}>
               <span class="nav-label">次の記事 →</span>
               {next.title}
             </a>

@@ -8,7 +8,6 @@ import ArticleThumb from '../components/ArticleThumb.astro';
 const allPosts = await getCollection('posts');
 const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="一留底辺ブログ - ゲーム・IT・FXのTips集">
@@ -55,12 +54,12 @@ const base = import.meta.env.BASE_URL;
             )}
             <div class="card-meta">
               <h3 class="card-title">
-                <a href={`${base}/posts/${post.id}`}>{post.data.title}</a>
+                <a href={`/posts/${post.id}`}>{post.data.title}</a>
               </h3>
               <p class="card-excerpt">{post.data.description}</p>
               <div class="card-footer">
                 <span class="card-date">{dateStr}</span>
-                <a href={`${base}/posts/${post.id}`} class="read-more">続きを読む →</a>
+                <a href={`/posts/${post.id}`} class="read-more">続きを読む →</a>
               </div>
             </div>
           </article>

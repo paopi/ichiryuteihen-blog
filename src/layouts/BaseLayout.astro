@@ -9,10 +9,9 @@ interface Props {
 }
 
 const { title, description = 'ゲーム・ツールの小さなバグ修正、Windows互換性問題の解消、小さな面倒ごとを解消するTips集。', ogImage, ogType = 'website' } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const siteUrl = import.meta.env.SITE ?? 'https://paopi.github.io';
+const siteUrl = import.meta.env.SITE ?? 'https://ichiryuteihen-blog.pages.dev';
 const pageUrl = `${siteUrl}${Astro.url.pathname}`;
-const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}${base}/favicon.svg`;
+const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/favicon.svg`;
 ---
 
 <!DOCTYPE html>
@@ -50,7 +49,7 @@ const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}${base}/favicon
 
         <!-- ロゴグループ: 留 + サイト名 + SNS -->
         <div class="site-logo">
-          <a href={`${base}/`}>
+          <a href={`/`}>
             <span class="logo-icon">留</span>
             <span class="logo-text">一留底辺ブログ</span>
           </a>
@@ -89,13 +88,13 @@ const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}${base}/favicon
       <div class="header-inner-nav">
         <nav class="site-nav" id="site-nav">
           <ul>
-            <li><a href={`${base}/`} class="nav-active">ホーム</a></li>
-            <li><a href={`${base}/#game`}>ゲーム</a></li>
-            <li><a href={`${base}/#it`}>IT<span class="nav-dropdown-arrow">▾</span></a></li>
+            <li><a href={`/`} class="nav-active">ホーム</a></li>
+            <li><a href={`/#game`}>ゲーム</a></li>
+            <li><a href={`/#it`}>IT<span class="nav-dropdown-arrow">▾</span></a></li>
             <li><a href="#">動画編集</a></li>
-            <li><a href={`${base}/#fx`}>FX</a></li>
+            <li><a href={`/#fx`}>FX</a></li>
             <li><a href="#">つぶやき</a></li>
-            <li><a href={`${base}/#other`}>その他</a></li>
+            <li><a href={`/#other`}>その他</a></li>
             <li><a href="#">お問い合わせ</a></li>
             <li>
               <a href="#" aria-label="検索">
@@ -127,7 +126,7 @@ const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}${base}/favicon
   <footer class="site-footer">
     <div class="footer-inner">
       <nav class="footer-links">
-        <a href={`${base}/`}>ホーム</a>
+        <a href={`/`}>ホーム</a>
         <a href="#">プライバシーポリシー</a>
         <a href="#">お問い合わせ</a>
       </nav>
