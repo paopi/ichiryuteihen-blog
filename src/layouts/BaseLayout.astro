@@ -6,12 +6,13 @@ interface Props {
   description?: string;
   ogImage?: string;
   ogType?: 'website' | 'article';
+  noindex?: boolean;
 }
 
-const { title, description = 'ゲーム・ツールの小さなバグ修正、Windows互換性問題の解消、小さな面倒ごとを解消するTips集。', ogImage, ogType = 'website' } = Astro.props;
-const siteUrl = import.meta.env.SITE ?? 'https://ichiryuteihen-blog.pages.dev';
-const pageUrl = `${siteUrl}${Astro.url.pathname}`;
-const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/favicon.svg`;
+const { title, description = 'ゲーム・ツールの小さなバグ修正、Windows互換性問題の解消、小さな面倒ごとを解消するTips集。', ogImage, ogType = 'website', noindex = false } = Astro.props;
+const siteUrl = import.meta.env.SITE ?? 'https://ichiryuteihen.com';
+const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL(ogImage ?? '/favicon.svg', siteUrl).href;
 ---
 
 <!DOCTYPE html>
@@ -20,6 +21,8 @@ const ogImageUrl = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/favicon.svg`;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content={description}>
+  <link rel="canonical" href={pageUrl}>
+  {noindex && <meta name="robots" content="noindex, follow">}
   <title>{title}</title>
   <!-- OGP -->
   <meta property="og:title" content={title} />

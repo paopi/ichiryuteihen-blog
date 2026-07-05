@@ -1,8 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://ichiryuteihen-blog.pages.dev',
+  site: 'https://ichiryuteihen.com',
+  integrations: [sitemap()],
   markdown: {
     shikiConfig: {
       themes: {
