@@ -13,7 +13,7 @@ interface Props {
 const { title, description = 'ゲーム・ツールの小さなバグ修正、Windows互換性問題の解消、小さな面倒ごとを解消するTips集。', ogImage, ogType = 'website', noindex = false, disableAds = false } = Astro.props;
 const siteUrl = import.meta.env.SITE ?? 'https://ichiryuteihen.com';
 const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
-const ogImageUrl = new URL(ogImage ?? '/favicon.svg', siteUrl).href;
+const ogImageUrl = new URL(ogImage ?? '/site-icon.png', siteUrl).href;
 ---
 
 <!DOCTYPE html>
@@ -23,6 +23,10 @@ const ogImageUrl = new URL(ogImage ?? '/favicon.svg', siteUrl).href;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content={description}>
   <link rel="canonical" href={pageUrl}>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   {noindex && <meta name="robots" content="noindex, follow">}
   <title>{title}</title>
   <!-- OGP -->
