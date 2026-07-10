@@ -11,7 +11,7 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.
 ---
 
 <BaseLayout title="一留底辺ブログ - ゲーム・IT・FXのTips集">
-  <main class="site-main">
+  <main class="site-main" id="main-content" tabindex="-1">
 
     <!-- ヒーロー -->
     <section class="hero">
@@ -20,12 +20,13 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.
     </section>
 
     <!-- カテゴリフィルター -->
-    <div class="category-filter" id="category-filter">
-      <button class="filter-btn active" data-category="all">すべて</button>
+    <div class="category-filter" id="category-filter" role="group" aria-label="記事カテゴリ">
+      <button class="filter-btn active" type="button" data-category="all" data-category-id="all" aria-pressed="true">すべて</button>
       {categories.map((c) => (
-        <button class="filter-btn" data-category={c.label}>{c.label}</button>
+        <button class="filter-btn" type="button" data-category={c.label} data-category-id={c.id} aria-pressed="false">{c.label}</button>
       ))}
     </div>
+    <p class="sr-only" id="filter-status" role="status"></p>
 
     <!-- 記事一覧 -->
     <h2 class="section-title">最新の記事</h2>
@@ -76,6 +77,7 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.
     // カテゴリフィルター + 無限スクロール
     (function initArticles() {
       const filterArea = document.getElementById('category-filter');
+      const filterStatus = document.getElementById('filter-status');
       const grid = document.getElementById('articles-grid');
       const sentinel = document.getElementById('infinite-scroll-sentinel');
       if (!grid) return;
@@ -84,6 +86,12 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.
       const allCards = Array.from(grid.querySelectorAll('.article-card')) as HTMLElement[];
       let currentCategory = 'all';
       let loadedCount = 0;
+
+      function getCategoryButton(categoryId: string) {
+        if (!filterArea) return null;
+        return Array.from(filterArea.querySelectorAll<HTMLButtonElement>('[data-category-id]'))
+          .find((button) => button.dataset.categoryId === categoryId) ?? null;
+      }
 
       function getFiltered() {
         return allCards.filter(function (card) {
@@ -103,7 +111,7 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.
         loadedCount += batch.length;
       }
 
-      function resetAndLoad(category: string) {
+      function resetAndLoad(category: string, categoryId: string) {
         currentCategory = category;
         loadedCount = 0;
         allCards.forEach(function (card) {
@@ -111,20 +119,56 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.
           card.classList.remove('card-fade-in');
         });
         loadMore();
+
+        if (filterArea) {
+          filterArea.querySelectorAll<HTMLButtonElement>('.filter-btn').forEach(function (button) {
+            const isActive = button.dataset.categoryId === categoryId;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-pressed', String(isActive));
+          });
+        }
+
+        const navLinks = document.querySelectorAll<HTMLElement>('[data-home-link], [data-category-link]');
+        navLinks.forEach(function (link) {
+          const isActive = categoryId === 'all'
+            ? link.hasAttribute('data-home-link')
+            : link.dataset.categoryLink === categoryId;
+          link.classList.toggle('nav-active', isActive);
+          if (isActive) link.setAttribute('aria-current', categoryId === 'all' ? 'page' : 'location');
+          else link.removeAttribute('aria-current');
+        });
+
+        if (filterStatus) {
+          const label = categoryId === 'all' ? 'すべて' : category;
+          filterStatus.textContent = `${label}の記事が${getFiltered().length}件あります`;
+        }
       }
 
-      resetAndLoad('all');
+      function applyCategoryFromHash() {
+        const categoryId = window.location.hash.slice(1).toLowerCase() || 'all';
+        const button = getCategoryButton(categoryId) ?? getCategoryButton('all');
+        if (!button) return;
+        resetAndLoad(button.dataset.category ?? 'all', button.dataset.categoryId ?? 'all');
+      }
+
+      applyCategoryFromHash();
 
       if (filterArea) {
-        const buttons = filterArea.querySelectorAll('.filter-btn');
+        const buttons = filterArea.querySelectorAll<HTMLButtonElement>('.filter-btn');
         buttons.forEach(function (btn) {
           btn.addEventListener('click', function () {
-            buttons.forEach(function (b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            resetAndLoad((btn as HTMLButtonElement).getAttribute('data-category') ?? 'all');
+            const categoryId = btn.dataset.categoryId ?? 'all';
+            const url = categoryId === 'all'
+              ? `${window.location.pathname}${window.location.search}`
+              : `#${categoryId}`;
+            window.history.pushState(null, '', url);
+            resetAndLoad(btn.dataset.category ?? 'all', categoryId);
           });
         });
       }
+
+      window.addEventListener('hashchange', applyCategoryFromHash);
+      window.addEventListener('popstate', applyCategoryFromHash);
 
       if (!sentinel || !window.IntersectionObserver) return;
 
