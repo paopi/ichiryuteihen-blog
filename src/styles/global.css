@@ -1183,3 +1183,14 @@ img {
     padding: 0.25rem 0.5rem;
   }
 }
+
+/* ===== AdSense 自動広告 ===== */
+/*
+ * 広告が配信されなかった枠（data-ad-status="unfilled"）を畳む。
+ * 自動広告はヘッダー直下に枠を挿入するが、未配信でも高さ280pxを確保したままになり、
+ * ファーストビューが空白で埋まってナビゲーションが押し下げられていた（26-08-11 実測）。
+ * 配信が始まれば status が "filled" になり、このルールは効かなくなるため広告は正常に表示される。
+ */
+ins.adsbygoogle[data-ad-status='unfilled'] {
+  display: none !important;
+}
