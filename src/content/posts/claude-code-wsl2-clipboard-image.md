@@ -101,7 +101,7 @@ allowed-tools: Bash, Read
 
 ### ポイント
 
-- `disable-model-invocation: true` を指定すると、スキルの内容がそのまま Claude Code への指示として展開されます（AI が解釈し直さない）
+- `disable-model-invocation: true` を指定すると、**AI が自動的にこのスキルを読み込むことがなくなり**、`/clip` と入力したときだけ動くようになります。会話の流れで勝手に発動してほしくない手動操作向けの設定です
 - `allowed-tools: Bash, Read` で、使えるツールを Bash と Read に限定しています
 - `wslpath -w` で WSL パスを Windows パスに変換しています（PowerShell は Windows パスしか理解できないため）
 

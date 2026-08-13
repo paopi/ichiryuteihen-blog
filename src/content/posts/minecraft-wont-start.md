@@ -1,6 +1,6 @@
 ---
 title: "Minecraftが起動しない時の対処法（Java版）"
-date: 2020-09-08
+date: 2026-04-03
 category: "ゲーム"
 description: "ランチャーは開くのにゲームが起動しない問題の解決策。Javaの再インストール、グラフィックドライバーの更新、ログファイルの確認方法まで。"
 tags: ["Minecraft", "Java版", "起動トラブル"]
@@ -40,7 +40,7 @@ java -version
 ## 対処法3: グラフィックドライバーを更新
 
 古いグラフィックドライバーが原因でクラッシュすることがあります。
-NVIDIA なら GeForce Experience、AMD なら Radeon Software から最新ドライバーに更新してください。
+NVIDIA なら NVIDIA App（旧 GeForce Experience）、AMD なら Radeon Software から最新ドライバーに更新してください。
 
 ## 対処法4: ログファイルを確認
 
