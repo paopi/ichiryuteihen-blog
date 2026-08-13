@@ -1,6 +1,6 @@
 ---
 title: "Steam版Stardew Valleyのセーブデータ移行方法"
-date: 2021-03-12
+date: 2026-04-03
 category: "ゲーム"
 description: "PCを買い替えた際のStardew Valleyセーブデータの移行手順。AppDataフォルダの場所と、クラウドセーブとローカルセーブの違いも解説。"
 tags: ["Stardew Valley", "セーブデータ", "Steam"]
@@ -28,7 +28,7 @@ Steam のクラウドセーブが有効な場合、新しいPCでゲームを起
 
 **クラウドセーブの確認方法:**
 1. Steam ライブラリで Stardew Valley を右クリック
-2. 「プロパティ」→「全般」タブ
+2. 「プロパティ」→「一般」タブ
 3. 「Steam クラウド」の項目を確認
 
 クラウドセーブが有効なら、基本的に移行作業は不要です。

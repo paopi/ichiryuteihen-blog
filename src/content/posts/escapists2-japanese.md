@@ -25,18 +25,14 @@ Steam で購入した **The Escapists 2** は残念ながら公式の日本語�
 
 ## 手順1: ゲームのバージョンを確認する
 
-まず Steam ライブラリから The Escapists 2 を右クリックし、
-「プロパティ」→「ローカルファイル」タブを開きます。
-「ローカルファイルを閲覧」ボタンをクリックするとインストールフォルダが開きます。
+翻訳ファイルは対応バージョンが分かれていることがあるため、まず自分のバージョンを確認します。
 
-![Steam ライブラリで The Escapists 2 を選択している画面](../../assets/escapists2-steam-library.png)
+Steam から The Escapists 2 を起動し、最初の画面で **HELP & OPTION** を開きます。
+画面の中央右あたりに `Steam_Windows_Release_〇〇` と書かれているところがあり、これがバージョンです。
 
-フォルダ内の `TheEscapists2.exe` を右クリック →「プロパティ」→「詳細」タブでファイルバージョンを確認してください。
-翻訳ファイルはバージョン対応が分かれていることがあるため、この確認が重要です。
+![ゲーム内に表示されているバージョン（Steam_Windows_Release_1.1.10.566064）](../../assets/escapists2-version.png)
 
-![TheEscapists2.exe のファイルバージョン確認例](../../assets/escapists2-version.png)
-
-※画像内のバージョン番号は確認箇所の例です。使用する翻訳ファイルは、GitHub Release に記載された対応バージョンに合わせてください。
+※画像は2020年2月に確認したときのバージョンです。使用する翻訳ファイルは、GitHub Release に記載された対応バージョンに合わせてください。
 
 ## 手順2: 翻訳ファイルを入手する
 
@@ -58,7 +54,13 @@ Resourse_〇〇/
   └── Unity_Assets_Files/
 ```
 
-ゲームのインストールフォルダ内にある `TheEscapists2_Data` フォルダを開き、
+ゲームのインストールフォルダは、Steam ライブラリで The Escapists 2 を右クリック →「プロパティ」→「ローカルファイル」→「ローカルファイルを閲覧」で開けます。
+
+![Steam ライブラリで The Escapists 2 を選択している画面](../../assets/escapists2-steam-library.png)
+
+※現在の Steam では「ローカルファイル」タブの名称が「インストール済みファイル」に変わっています。
+
+開いたフォルダ内の `TheEscapists2_Data` フォルダを開き、
 既存の `resources.assets` をダウンロードした翻訳ファイル側の `resources.assets` に置き換えます。
 同じ場所に `Unity_Assets_Files` も配置してください。
 上書き前に、既存の `resources.assets` はバックアップしておくのをおすすめします。

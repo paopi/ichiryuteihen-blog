@@ -49,7 +49,12 @@ nvm use 22
 npm install -g @anthropic-ai/claude-code
 ```
 
-Claude Code は **Node.js 18 以上**が必須です。22 を入れておけば間違いありません。
+<div class="note-box">
+📝 <strong>2026年8月時点の補足</strong><br>
+現在の公式の推奨インストール方法は、Node.js を使わない<strong>ネイティブインストーラー</strong>です。<br>
+<code>curl -fsSL https://claude.ai/install.sh | bash</code><br>
+npm 経由でインストールする場合は <strong>Node.js 22 以上</strong>が必要です（v2.1.198以降）。それより古いNode.jsでは <code>EBADENGINE</code> の警告が出ますが、npmパッケージはネイティブバイナリを取得する仕組みなので、インストール自体は完了し <code>claude</code> も動作します。
+</div>
 
 ## 2. sudo が使えない
 
@@ -88,21 +93,24 @@ git commit -m "fix"
 
 ### 解決方法
 
-Sandbox の書き込み許可は `settings.json` で設定できます。
+Sandbox が有効なとき、コマンドが書き込めるのは**カレントディレクトリとセッション用の一時ディレクトリだけ**です。
+それ以外の場所に書き込む必要がある場合は、`settings.json` の `sandbox.filesystem.allowWrite` にパスを追加して許可します。
 
 ```json
 {
-  "permissions": {
-    "allow": [
-      "Bash(dangerouslyDisableSandbox:true)"
-    ]
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "allowWrite": ["~/.kube", "/tmp/build"]
+    }
   }
 }
 ```
 
-ただし、毎回 Sandbox を無効化するのではなく、Claude Code が提案する「Sandbox を無効にして再試行しますか？」の確認に都度許可を出す方が安全です。
+別リポジトリで git 操作をしたい場合も、そのリポジトリのパスをここに追加しておくと通るようになります。
 
-`/tmp` に一時ファイルを書きたい場合は、プロジェクトディレクトリ内に一時ディレクトリを作る方が Sandbox と相性が良いです。
+一時ファイルは、素の `/tmp` ではなくプロジェクトディレクトリ内やセッション用の一時ディレクトリに置くほうが Sandbox と相性が良いです。
+どうしても Sandbox の外で実行する必要があるコマンドは、Claude Code が出す「Sandbox を無効にして再試行しますか？」の確認に都度許可を出す形が安全です。
 
 ## 4. GitHub CLI（gh）が apt で入らない
 
