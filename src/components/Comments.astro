@@ -1,0 +1,80 @@
+---
+/**
+ * Giscus によるコメント欄。
+ *
+ * バックエンドは GitHub Discussions（paopi/ichiryuteihen-blog の Announcements カテゴリ）。
+ * Announcements を使うのは、メンテナ以外が新規スレッドを立てられず荒らしに強いため（giscus 公式の推奨）。
+ * 記事と Discussion は pathname で紐付ける（`data-mapping="pathname"`）。
+ *
+ * repoId / categoryId は giscus.app が発行する公開識別子で、秘密情報ではない。
+ * ブラウザに配信される値なので直書きで正しい（GA計測ID・AdSenseパブリッシャーIDと同じ扱い）。
+ *
+ * テーマはブログのライト/ダークに追従する。
+ * - 初期表示: この場で `data-theme` を読んで決める（localStorage 依存なのでビルド時には決まらない）
+ * - 切替時  : BaseLayout の applyTheme() が iframe へ postMessage する
+ */
+const giscus = {
+  repo: 'paopi/ichiryuteihen-blog',
+  repoId: 'R_kgDOR3i7lA',
+  category: 'Announcements',
+  categoryId: 'DIC_kwDOR3i7lM4DDQ_z',
+  mapping: 'pathname',
+  strict: '1',
+  reactionsEnabled: '1',
+  emitMetadata: '0',
+  inputPosition: 'bottom',
+  lang: 'ja',
+  loading: 'lazy',
+};
+---
+
+<section class="comments" aria-labelledby="comments-heading">
+  <h2 id="comments-heading" class="comments-heading">コメント</h2>
+  <p class="comments-note">
+    GitHub アカウントでコメントできます。内容は
+    <a href="https://github.com/paopi/ichiryuteihen-blog/discussions" rel="noopener noreferrer" target="_blank">GitHub Discussions</a>
+    に公開されます。
+  </p>
+
+  <div class="giscus"></div>
+
+  <noscript>
+    <p class="comments-note">コメントの表示には JavaScript が必要です。</p>
+  </noscript>
+</section>
+
+<script is:inline define:vars={{ giscus }}>
+  (function initGiscus() {
+    const container = document.querySelector('.giscus');
+    if (!container) return;
+
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+
+    const attrs = {
+      'data-repo': giscus.repo,
+      'data-repo-id': giscus.repoId,
+      'data-category': giscus.category,
+      'data-category-id': giscus.categoryId,
+      'data-mapping': giscus.mapping,
+      'data-strict': giscus.strict,
+      'data-reactions-enabled': giscus.reactionsEnabled,
+      'data-emit-metadata': giscus.emitMetadata,
+      'data-input-position': giscus.inputPosition,
+      'data-lang': giscus.lang,
+      'data-loading': giscus.loading,
+      // ダークは背景透過にしてブログの地色（#1a1a1a）に馴染ませる
+      'data-theme': isDark ? 'transparent_dark' : 'light',
+    };
+    for (const [key, value] of Object.entries(attrs)) {
+      script.setAttribute(key, value);
+    }
+
+    // giscus は script タグの親要素に iframe を挿入する
+    container.appendChild(script);
+  })();
+</script>

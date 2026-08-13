@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+/**
+ * 問い合わせフォーム（Formspree）。
+ *
+ * FORM_ID は Formspree でフォームを作ると発行される公開識別子（フォームのエンドポイントURLに
+ * そのまま出るもので、秘密情報ではない）。未設定のあいだはフォームを出さず案内文に切り替える。
+ *
+ * JavaScript が無効でも動くように、まず素の <form action method="POST"> として成立させ、
+ * JS があるときだけ fetch で送信して同じページ内に結果を出す（progressive enhancement）。
+ */
+const FORM_ID = '';
+const endpoint = FORM_ID ? `https://formspree.io/f/${FORM_ID}` : '';
+---
+
+<BaseLayout
+  title="お問い合わせ - 一留底辺ブログ"
+  description="一留底辺ブログへのお問い合わせ・記事の誤りのご指摘はこちらからお願いします。"
+>
+  <main id="main-content" tabindex="-1">
+    <article class="article-page">
+      <header class="article-header">
+        <h1 class="article-title">お問い合わせ</h1>
+      </header>
+
+      <div class="article-body">
+        <p>
+          記事の内容についてのご指摘・ご質問、その他のご連絡はこちらからお送りください。
+          <strong>記事の誤りのご指摘は特に歓迎します</strong>。確認のうえ修正します。
+        </p>
+        <p>
+          GitHub アカウントをお持ちの場合は、各記事下部のコメント欄からでもご連絡いただけます。
+        </p>
+
+        {endpoint ? (
+          <form class="contact-form" id="contact-form" action={endpoint} method="POST">
+            <div class="form-row">
+              <label for="cf-kind">種別</label>
+              <select id="cf-kind" name="種別">
+                <option value="記事の誤りの指摘">記事の誤りの指摘</option>
+                <option value="質問">質問</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="cf-name">お名前<span class="form-optional">（任意）</span></label>
+              <input type="text" id="cf-name" name="お名前" autocomplete="name" />
+            </div>
+
+            <div class="form-row">
+              <label for="cf-email">
+                メールアドレス<span class="form-optional">（任意・返信が必要な場合のみ）</span>
+              </label>
+              <input type="email" id="cf-email" name="email" autocomplete="email" />
+            </div>
+
+            <div class="form-row">
+              <label for="cf-message">本文<span class="form-required">必須</span></label>
+              <textarea id="cf-message" name="本文" rows="8" required></textarea>
+            </div>
+
+            {/* 自動投稿よけ。人間には見えないので、値が入っていれば bot と判断される */}
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+            <button type="submit" class="contact-submit">送信する</button>
+
+            <p class="form-note">
+              送信内容は <a href="https://formspree.io/" rel="noopener noreferrer" target="_blank">Formspree</a> を経由して
+              管理者にメールで届きます。詳しくは<a href="/privacy/">プライバシーポリシー</a>をご覧ください。
+            </p>
+
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        ) : (
+          <p class="form-note">
+            現在フォームを準備中です。お急ぎの場合は、各記事下部のコメント欄（GitHub Discussions）をご利用ください。
+          </p>
+        )}
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<script>
+  // JS があるときだけ、ページ遷移せずに送信する。
+  // 失敗したときは素の form 送信にフォールバックせず、その場でエラーを見せる（入力を失わせないため）。
+  (function initContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status');
+    if (!form || !status) return;
+
+    const submitBtn = form.querySelector('.contact-submit') as HTMLButtonElement | null;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.textContent = '送信中…';
+      status.className = 'form-status';
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (response.ok) {
+          form.reset();
+          status.textContent = '送信しました。ありがとうございます。';
+          status.className = 'form-status is-ok';
+        } else {
+          const data = await response.json().catch(() => null);
+          const detail = data?.errors?.map((e: { message: string }) => e.message).join(' / ');
+          status.textContent = detail || '送信に失敗しました。時間をおいて再度お試しください。';
+          status.className = 'form-status is-error';
+        }
+      } catch {
+        status.textContent = '送信に失敗しました。通信状態をご確認ください。';
+        status.className = 'form-status is-error';
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  })();
+</script>
