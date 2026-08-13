@@ -21,10 +21,6 @@
 # --- 一部の情報が欠けているが同一テーマの記事 ---
 /game/the-escapists2-jplanguage/ /posts/escapists2-japanese 301
 
-/fx/fxa/ /posts/fx-progress-2018-05 301
-# /fx/fx途中経過/
-/fx/fx%E9%80%94%E4%B8%AD%E7%B5%8C%E9%81%8E/ /posts/fx-progress-2018-05 301
-
 # --- 現行記事が旧記事の書き直しだったもの（2026-08-13に旧記事ベースへ修正済み）---
 /it/opencv/post-547/ /posts/opencv-mat-basics 301
 /it/post-547/ /posts/opencv-mat-basics 301
@@ -51,6 +47,10 @@
 # 判断日 2026-08-13。原文と画像は wp-backup/ に保全済みなので、気が変わればいつでも移行できる。
 #
 # /tubuyaki/wordpressniiko/            WordPressに移行（156字・実質中身なし）
+#
+# FX記事は掲載しない方針（口座名・レバレッジ・損益といった扱いの面倒な情報を含むため）。
+# /fx/fxa/                             FX途中経過
+# /fx/fx途中経過/                       （同上・旧slug）
 # /fx/fxb/                             FX途中経過２（個人日記＋Amazonアフィリエイト）
 # /game/post-706/                      ラストイデア 1.1.0 スキルダメージ変更まとめ
 #                                      → ラストイデアは2020年5月29日にサービス終了済み
