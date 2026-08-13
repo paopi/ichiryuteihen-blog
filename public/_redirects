@@ -1,29 +1,61 @@
 # 旧WordPress（ロリポップ）からの301リダイレクト
 #
 # 旧サイトのパーマリンク構造は /%category%/%postname%/ （カテゴリは親子でパスになる）。
-# 対応表はDBダンプ（wp2_posts）から復元したもので、旧URLは実在が確認済み。
+# 対応表はDBダンプ（wp2_posts / wp2_postmeta）から復元したもので、旧URLは実在が確認済み。
+#
+# 【重要】1記事に旧URLが複数ある。理由は次の3つ:
+#   1. slug変更の履歴が postmeta の _wp_old_slug に残っており、WordPressは旧slugでも転送していた
+#   2. 記事に複数カテゴリが付いていると、カテゴリごとのパスでもアクセスできた
+#   3. 日本語タイトルがそのままslugになっていた時期がある（パーセントエンコードで登録）
 # 詳細な調査結果は claude-project/browser-project/docs/wordpress-migration.md を参照。
 
 # --- 内容を継承している記事 ---
 /game/oxygensettings/ /posts/oxygen-not-included-borderless 301
+/game/post-729/ /posts/oxygen-not-included-borderless 301
+
 /it/movie/geforce-experience-kasoru/ /posts/geforce-cursor-missing 301
+/it/movie/post-771/ /posts/geforce-cursor-missing 301
+/game/geforce-experience-kasoru/ /posts/geforce-cursor-missing 301
+/game/post-771/ /posts/geforce-cursor-missing 301
 
 # --- 一部の情報が欠けているが同一テーマの記事 ---
 /game/the-escapists2-jplanguage/ /posts/escapists2-japanese 301
+
 /fx/fxa/ /posts/fx-progress-2018-05 301
+# /fx/fx途中経過/
+/fx/fx%E9%80%94%E4%B8%AD%E7%B5%8C%E9%81%8E/ /posts/fx-progress-2018-05 301
 
-# --- 現行記事が旧記事の書き直しになっているもの（テーマは近いが内容は別） ---
+# --- 現行記事が旧記事の書き直しだったもの（2026-08-13に旧記事ベースへ修正済み）---
 /it/opencv/post-547/ /posts/opencv-mat-basics 301
-/game/post-666/ /posts/dungeon-warfare-2-review 301
-# 旧記事はVisual Studio 2015へのOpenCV導入手順。現行記事はPythonのpipエラー対処で
-# 内容は別だが、OpenCV導入で詰まった読者の受け皿として最も近いためここへ送る。
-/it/opencv/win10-v14-opencv341/ /posts/python-opencv-install-error 301
+/it/post-547/ /posts/opencv-mat-basics 301
 
-# --- 未移行のため転送先なし（記事を移行したらここに追加する）---
-# /tubuyaki/wordpressniiko/          WordPressに移行
-# /fx/fxb/                           FX途中経過２
-# /it/movie/geforce-experience/      Geforce Experienceで録画してYoutube投稿
-# /game/post-706/                    ラストイデア 1.1.0 スキルダメージ変更まとめ
-# /game/terraria-cant-move-14/       Terraria 1.4 移動できない解決法
-# /その他/wacom-windowsink/           wacomペンタブでIMEが無効になる（URLに日本語を含む）
-# /game/steam-tribes-of-midgard-tom/ Tribes of Midgard レビュー
+/game/post-666/ /posts/dungeon-warfare-2-review 301
+
+# 旧記事（VS2015へのOpenCV導入手順）を別slugで復活させたので、転送先をそちらへ変更。
+# pipエラー対処の /posts/python-opencv-install-error は現行記事としてそのまま残している。
+/it/opencv/win10-v14-opencv341/ /posts/opencv-341-visual-studio-2015-setup 301
+
+# --- 2026-08-13 に新規移行した記事 ---
+/game/terraria-cant-move-14/ /posts/terraria-cant-move 301
+/game/post-815/ /posts/terraria-cant-move 301
+# /game/terraria【テラリア】1-4-journeys-end-移動ができない！キーボード/
+/game/terraria%E3%80%90%E3%83%86%E3%83%A9%E3%83%AA%E3%82%A2%E3%80%911-4-journeys-end-%E7%A7%BB%E5%8B%95%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%EF%BC%81%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89/ /posts/terraria-cant-move 301
+
+# /その他/wacom-windowsink/
+/%E3%81%9D%E3%81%AE%E4%BB%96/wacom-windowsink/ /posts/wacom-windows-ink-ime 301
+
+/game/steam-tribes-of-midgard-tom/ /posts/tribes-of-midgard-review 301
+/game/steam-tribes-of-midgard/ /posts/tribes-of-midgard-review 301
+
+# --- 移行しないと判断した記事（転送先なし・404のまま）---
+# 判断日 2026-08-13。原文と画像は wp-backup/ に保全済みなので、気が変わればいつでも移行できる。
+#
+# /tubuyaki/wordpressniiko/            WordPressに移行（156字・実質中身なし）
+# /fx/fxb/                             FX途中経過２（個人日記＋Amazonアフィリエイト）
+# /game/post-706/                      ラストイデア 1.1.0 スキルダメージ変更まとめ
+#                                      → ラストイデアは2020年5月29日にサービス終了済み
+# /it/movie/geforce-experience/        Geforce Experienceで録画してYoutube投稿
+# /it/geforce-experience/              （同上・カテゴリ違い）
+# /game/geforce-experience/            （同上・カテゴリ違い）
+# /it/movie/geforce-experience-で録画してyoutubeに動画投稿する方法/  （同上・旧slug）
+#   → GeForce Experience は NVIDIA App に置き換えられ、2018年当時のUI手順は使えない
