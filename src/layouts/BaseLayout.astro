@@ -16,6 +16,7 @@ const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage ?? '/site-icon.png', siteUrl).href;
 const isHome = Astro.url.pathname === '/';
 const isPrivacy = Astro.url.pathname === '/privacy/';
+const isContact = Astro.url.pathname === '/contact/';
 ---
 
 <!DOCTYPE html>
@@ -124,6 +125,7 @@ const isPrivacy = Astro.url.pathname === '/privacy/';
     <div class="footer-inner">
       <nav class="footer-links">
         <a href={`/`} aria-current={isHome ? 'page' : undefined}>ホーム</a>
+        <a href="/contact/" aria-current={isContact ? 'page' : undefined}>お問い合わせ</a>
         <a href="/privacy/" aria-current={isPrivacy ? 'page' : undefined}>プライバシーポリシー</a>
       </nav>
       <p class="footer-copy">© 2018–{new Date().getFullYear()} 一留底辺ブログ. All rights reserved.</p>
@@ -152,6 +154,18 @@ const isPrivacy = Astro.url.pathname === '/privacy/';
         html.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         (btn as HTMLButtonElement).textContent = theme === 'dark' ? '☀️ ライト' : '🌙 ダーク';
+        syncGiscusTheme(theme);
+      }
+
+      // 記事ページのコメント欄（giscus）もテーマに追従させる。
+      // コメント欄がないページや読み込み前は iframe がないので何もしない。
+      function syncGiscusTheme(theme: string) {
+        const frame = document.querySelector('iframe.giscus-frame') as HTMLIFrameElement | null;
+        if (!frame || !frame.contentWindow) return;
+        frame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: theme === 'dark' ? 'transparent_dark' : 'light' } } },
+          'https://giscus.app'
+        );
       }
     })();
 

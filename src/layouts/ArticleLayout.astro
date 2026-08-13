@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import Comments from '../components/Comments.astro';
 import { badgeClass as getBadgeClass } from '../categories';
 
 interface Props {
@@ -70,5 +71,8 @@ const formattedDate = date.toLocaleDateString('ja-JP', {
       )}
 
     </article>
+
+    <!-- コメント欄（記事本文の一部ではないので article の外に置く） -->
+    <Comments />
   </main>
 </BaseLayout>
