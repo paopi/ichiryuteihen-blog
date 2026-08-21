@@ -35,6 +35,9 @@
   --color-article-bg: #ffffff;
   --color-code-bg: #f4f4f4;
   --color-code-border: #e0e0e0;
+  /* 本文中リンク専用。--color-accent はダークで #ccc になり本文と見分けがつかないため分離 */
+  --color-link: #1a6dc4;
+  --color-link-hover: #0d4d94;
   --transition: 0.2s ease;
   --border-radius: 8px;
   --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -72,6 +75,8 @@
   --color-code-bg: #1e1e1e;
   --color-code-border: #333333;
   --color-nav-bar-border: #333333;
+  --color-link: #6db3f2;
+  --color-link-hover: #a5d2f8;
 }
 
 /* --- Shiki デュアルテーマ対応 --- */
@@ -868,6 +873,19 @@ img {
   font-size: 0.875rem;
 }
 
+/* 本文中のリンク（色だけだと見落とすので下線を必ず付ける） */
+.article-body a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.article-body a:hover {
+  color: var(--color-link-hover);
+  text-decoration-thickness: 2px;
+}
+
 /* 記事内テーブル */
 .article-body table {
   width: 100%;
@@ -939,14 +957,14 @@ img {
 
 .article-body #目次 + ol a,
 .article-body #目次 + ul a {
-  color: var(--color-accent);
+  color: var(--color-link);
   text-decoration: none;
-  border-bottom: 1px dashed var(--color-accent);
+  border-bottom: 1px dashed var(--color-link);
 }
 
 .article-body #目次 + ol a:hover,
 .article-body #目次 + ul a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-link-hover);
   border-bottom-style: solid;
 }
 
