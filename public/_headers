@@ -1,8 +1,11 @@
+# HSTS の max-age は6ヶ月。includeSubDomains と preload は意図的に付けていない
+# （付けると撤回が難しくなる。外したいときは該当行を消して6ヶ月待てば戻る）
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=15768000
 
 # pages.dev のインデックス防止（独自ドメイン移行後の重複コンテンツ対策）
 https://:project.pages.dev/*

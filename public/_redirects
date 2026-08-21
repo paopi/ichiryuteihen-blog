@@ -49,10 +49,9 @@
 #
 # /tubuyaki/wordpressniiko/            WordPressに移行（156字・実質中身なし）
 #
-# FX記事は掲載しない方針（口座名・レバレッジ・損益といった扱いの面倒な情報を含むため）。
-# /fx/fxa/                             FX途中経過
+# /fx/fxa/                             掲載しない判断（転送先なし）
 # /fx/fx途中経過/                       （同上・旧slug）
-# /fx/fxb/                             FX途中経過２（個人日記＋Amazonアフィリエイト）
+# /fx/fxb/                             （同上）
 # /game/post-706/                      ラストイデア 1.1.0 スキルダメージ変更まとめ
 #                                      → ラストイデアは2020年5月29日にサービス終了済み
 # /it/movie/geforce-experience/        Geforce Experienceで録画してYoutube投稿
