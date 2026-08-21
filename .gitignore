@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # design comparison files
 thumb-patterns.html
+
+# playwright-cli の作業ファイル（スナップショット・コンソールログ）
+.playwright-cli/

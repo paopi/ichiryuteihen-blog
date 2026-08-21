@@ -868,6 +868,65 @@ img {
   font-size: 0.875rem;
 }
 
+/* 記事内テーブル */
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+}
+
+.article-body th,
+.article-body td {
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+}
+
+.article-body th:last-child,
+.article-body td:last-child {
+  border-right: none;
+}
+
+.article-body thead th {
+  background-color: var(--color-bg);
+  font-weight: 700;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.article-body tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.article-body tbody tr:nth-child(even) td {
+  background-color: var(--color-bg);
+}
+
+/* セル内のファイル名・コマンドは折り返さない */
+.article-body td code,
+.article-body th code {
+  white-space: nowrap;
+}
+
+/* 狭い画面では横スクロールさせる（潰して読めなくするより良い） */
+@media (max-width: 640px) {
+  .article-body table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .article-body th,
+  .article-body td {
+    white-space: nowrap;
+  }
+}
+
 /* 目次スタイル（#目次 の直後の ol） */
 .article-body #目次 + ol,
 .article-body #目次 + ul {
@@ -908,6 +967,81 @@ img {
   margin: 1rem 0;
   color: var(--color-badge-it-text);
   font-size: 0.9rem;
+}
+
+/* 記事内の図解（Before/After のフロー図など・画像を使わずCSSで組む） */
+.article-body .fig-flow {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0 0.75rem;
+  flex-wrap: wrap;
+}
+
+.article-body .fig-col {
+  flex: 1 1 260px;
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg-card);
+  padding: 1rem;
+}
+
+.article-body .fig-col-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.article-body .fig-before .fig-col-title { color: var(--color-badge-fx-text); }
+.article-body .fig-after .fig-col-title { color: var(--color-badge-it-text); }
+
+.article-body .fig-node {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background-color: var(--color-bg);
+  padding: 0.6rem 0.7rem;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.article-body .fig-node b {
+  display: block;
+}
+
+.article-body .fig-node .fig-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+}
+
+.article-body .fig-before .fig-node-key {
+  border-color: var(--color-badge-fx-text);
+  background-color: var(--color-badge-fx-bg);
+  color: var(--color-badge-fx-text);
+}
+
+.article-body .fig-after .fig-node-key {
+  border-color: var(--color-badge-it-text);
+  background-color: var(--color-badge-it-bg);
+  color: var(--color-badge-it-text);
+}
+
+.article-body .fig-arrow {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+  padding: 0.3rem 0;
+  line-height: 1.4;
+}
+
+.article-body .fig-caption {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 /* 記事内画像 */
